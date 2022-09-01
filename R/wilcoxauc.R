@@ -180,7 +180,7 @@ wilcoxauc.default <- function(X, y, groups_use=NULL, verbose=TRUE, ...) {
     fdr <- apply(pvals, 2, function(x) p.adjust(x, 'BH'))
 
     ### Auxiliary Statistics (AvgExpr, PctIn, LFC, etc)
-    group_sums <- sumGroups(X, y, 1)
+    group_sums <- sumGroups(expm1(X), y, 1)          
     group_nnz <- nnzeroGroups(X, y, 1)
     group_pct <- sweep(group_nnz, 1, as.numeric(table(y)), "/") %>% t()
     group_pct_out <- -group_nnz %>% 
@@ -190,7 +190,7 @@ wilcoxauc.default <- function(X, y, groups_use=NULL, verbose=TRUE, ...) {
     cs <- colSums(group_sums)
     gs <- as.numeric(table(y))
     lfc <- Reduce(cbind, lapply(seq_len(length(levels(y))), function(g) {
-        group_means[, g] - ((cs - group_sums[g, ]) / (length(y) - gs[g]))
+        log(group_means[, g]+1,2) - log(((cs - group_sums[g, ]) / (length(y) - gs[g]))+1,2)
     }))
 
     res_list <- list(auc = auc, 
