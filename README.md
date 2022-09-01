@@ -9,7 +9,7 @@ We are working on getting presto into CRAN. For now, install Presto from github 
 
 ```{r}
 library(devtools)
-install_github('immunogenomics/presto')
+install_github('microbiomeCat/presto')
 ```
 
 # Usage
