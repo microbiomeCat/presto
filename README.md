@@ -2,6 +2,8 @@
 
 Presto performs a fast Wilcoxon rank sum test and auROC analysis. Latest benchmark ran 1 million observations, 1K features, and 10 groups in 16 seconds (sparse input) and 85 seconds (dense input). 
 
+the logfc was calculated same as seurat now. 
+
 
 # Installation
 
