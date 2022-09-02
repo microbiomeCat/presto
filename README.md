@@ -25,3 +25,14 @@ wilcoxauc(sce_object, 'group_name')
 ```
 
 For examples, see `?wilcoxauc` and the [vignette](http://htmlpreview.github.io/?https://github.com/immunogenomics/presto/blob/master/docs/getting-started.html)
+
+# get seurat results
+
+```
+
+markers <- wilcoxauc(seurat_object, 'seurat_clusters',seurat_assay="RNA",assay="data") %>% 
+  filter(logFC >= 0.25) %>% filter(pct_in >= 10) %>% filter(pval <= 0.01)  
+
+markers$padj <- p.adjust(markers$pval, method='bonferroni', n=nrow(seurat_object@assays$RNA@data))
+
+```
