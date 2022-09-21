@@ -35,4 +35,8 @@ markers <- wilcoxauc(seurat_object, 'seurat_clusters',seurat_assay="RNA",assay="
 
 markers$padj <- p.adjust(markers$pval, method='bonferroni', n=nrow(seurat_object@assays$RNA@data))
 
+markers <- markers[,c("pval","logFC","pct_in","pct_out","padj","group","feature")]
+colnames(markers) <- c("p_val","avg_log2FC","pct.1","pct.2","p_val_adj","cluster","gene")
+markers$pct.1 <- round(markers$pct.1/100,3)
+markers$pct.2 <- round(markers$pct.2/100,3)
 ```
